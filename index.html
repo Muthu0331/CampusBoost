@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,13 +16,19 @@
 
   <h2>₹99</h2>
 
-  <button onclick="startPayment()">Buy Now</button>
+  <button id="buyButton" onclick="startPayment()">
+    Buy Now
+  </button>
 
   <p id="message"></p>
 
   <script>
     async function startPayment() {
-      document.getElementById("message").innerText = "Creating payment...";
+      const button = document.getElementById("buyButton");
+      const message = document.getElementById("message");
+
+      button.disabled = true;
+      message.innerText = "Creating payment...";
 
       try {
         const response = await fetch("/api/create-order", {
@@ -31,16 +37,27 @@
 
         const data = await response.json();
 
+        console.log(data);
+
         if (!response.ok) {
-          throw new Error(data.message || data.error || "Payment failed");
+          throw new Error(
+            data.message ||
+            data.error ||
+            "Payment creation failed"
+          );
         }
 
-        document.getElementById("message").innerText =
+        message.innerText =
           "Payment order created successfully!";
-          
+
       } catch (error) {
-        document.getElementById("message").innerText =
+        console.error(error);
+
+        message.innerText =
           "Payment failed: " + error.message;
+
+      } finally {
+        button.disabled = false;
       }
     }
   </script>
