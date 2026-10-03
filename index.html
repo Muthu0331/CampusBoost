@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CampusBoost</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusBoost - College Career eBooks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #222;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    button {
+      background: #111827;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
+
+<header>
   <h1>CampusBoost</h1>
-  <p>Career guides and eBooks for college students.</p>
+  <p>Practical Career Guides for College Students</p>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>College & Career Starter eBook</h2>
+    <p>
+      A practical guide to help college students build their
+      career, skills, resume and job-search strategy.
+    </p>
+
+    <div class="price">₹99</div>
+
+    <button onclick="startPayment()">
+      Buy Now
+    </button>
+
+    <p id="message"></p>
+  </div>
+</div>
+
+<script>
+  function startPayment() {
+    document.getElementById("message").innerText =
+      "Payment setup is coming soon.";
+  }
+</script>
+
 </body>
 </html>
