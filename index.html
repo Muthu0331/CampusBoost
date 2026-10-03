@@ -74,11 +74,28 @@
 </div>
 
 <script>
-  function startPayment() {
-    document.getElementById("message").innerText =
-      "Payment setup is coming soon.";
-  }
-</script>
+  async function startPayment() {
+  const message = document.getElementById("message");
+  message.innerText = "Creating payment...";
 
-</body>
-</html>
+  try {
+    const response = await fetch("/api/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Payment creation failed");
+    }
+
+    message.innerText = "Payment order created. Cashfree checkout will be connected next.";
+    console.log(data);
+
+  } catch (error) {
+    message.innerText = error.message;
+  }
+}
